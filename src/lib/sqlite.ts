@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import Database from "better-sqlite3";
+import { DatabaseSync } from "node:sqlite";
 import { getCacheDir } from "@/lib/paths";
 
-export type SqliteDb = Database.Database;
+export type SqliteDb = DatabaseSync;
 
 let db: SqliteDb | null = null;
 
@@ -11,10 +11,10 @@ function openDb(): SqliteDb {
   const cacheDir = getCacheDir();
   fs.mkdirSync(cacheDir, { recursive: true });
   const dbPath = path.join(cacheDir, "index.sqlite");
-  const instance = new Database(dbPath);
-  instance.pragma("journal_mode = WAL");
-  instance.pragma("synchronous = NORMAL");
-  instance.pragma("temp_store = MEMORY");
+  const instance = new DatabaseSync(dbPath);
+  instance.exec("PRAGMA journal_mode = WAL;");
+  instance.exec("PRAGMA synchronous = NORMAL;");
+  instance.exec("PRAGMA temp_store = MEMORY;");
   return instance;
 }
 
@@ -63,4 +63,3 @@ export function migrateDb() {
     CREATE INDEX IF NOT EXISTS idx_tool_counts_tool_name ON tool_counts(tool_name);
   `);
 }
-
