@@ -90,3 +90,7 @@ Open `http://localhost:3000`
 ## License
 
 MIT License. See `LICENSE`.
+
+<a href="https://llmapis.com?source=https%3A%2F%2Fgithub.com%2Fonewesong%2Fcodex-viz" target="_blank"><img src="https://llmapis.com/api/badge/onewesong/codex-viz" alt="LLMAPIS" width="60" /></a>
+
+*Partnership with [https://llmapis.com](https://llmapis.com) - Discover more AI tools and resources*
